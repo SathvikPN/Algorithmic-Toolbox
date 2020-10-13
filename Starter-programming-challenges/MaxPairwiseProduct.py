@@ -20,6 +20,9 @@ def max_pairwise_product1(numbers):
     n = len(numbers)
     max_product = 0
     for first in range(n):
+        if(n<2):
+            max_product = numbers[0]
+            break
         for second in range(first + 1, n):
             max_product = max(max_product,
                 numbers[first] * numbers[second])
@@ -35,6 +38,10 @@ def max_pairwise_product2(numbers):
             index = i
             biggest1 = numbers[i]
     for j in range(n):
+        if (n<2):
+            print("Two elements didn't exist to multiply",end=' ')
+            biggest2=1
+            break
         if ((j!=index)and(numbers[j]>biggest2)):
             biggest2 = numbers[j]
 
@@ -43,16 +50,16 @@ def max_pairwise_product2(numbers):
 
 def stressTest(N,M):
     while True:
-        n = random.randrange(2,N)
+        n = random.randint(1,N)
         A=[]
         for i in range (1,n+1):
-            x = random.randrange(0,M)
+            x = random.randint(0,M)
             A.append(x)
         print('Random Input Numbers list=',A)
         result1 = max_pairwise_product1(A)
         result2 = max_pairwise_product2(A)
         if result1==result2:
-            print("OK")
+            print("Result=OK")
             time.sleep(0.5)
         else:
             print("Wrong. Result Mismatch",result1,result2)
@@ -74,4 +81,4 @@ Stress Testing...
 Enter max list size and max list values''')
     N,M = input().split()
     stressTest(int(N),int(M))
-    
+   
