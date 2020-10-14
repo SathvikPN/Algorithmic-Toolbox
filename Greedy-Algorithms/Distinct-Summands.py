@@ -70,13 +70,14 @@ def optimal_summands(s):
     summands.append(last_element)
     return summands
    
-
-if __name__ == '__main__':
+# Main funciton
+# Enter -1 to exit 
+n=-2
+while n!=-1:
     n = int(input())
     summands1=[]
     summands2=optimal_summands_recursive(n,summands1)
 
-    '''
     summands = optimal_summands(n)
    
     if summands==summands2:
@@ -84,9 +85,8 @@ if __name__ == '__main__':
     else:
         print(f"Algebraic approach --> {summands}")
         print("Recursive approach --> {summands2}")
-    '''
+
     print(len(summands2))
     for x in summands2:
        print(x, end=' ')
-
-
+    print('')
