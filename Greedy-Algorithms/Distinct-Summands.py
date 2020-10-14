@@ -1,9 +1,10 @@
 # Uses python3
 import sys
 import time
+import math
     
-
-def optimal_summands(n,summands):
+#This function has some error
+def optimal_summands_recursive(n,summands):
     if n==0:
         return summands
     
@@ -16,7 +17,7 @@ def optimal_summands(n,summands):
     for i in range(last_element+1,n+1):
         if i not in summands:
             
-            print(f"{n} = {i} + {n-i}")
+           # print(f"{n} = {i} + {n-i}")
             if ((n-i)==0):
                 summands.append(i)
                 return summands
@@ -32,15 +33,48 @@ def optimal_summands(n,summands):
                     summands.append(i)
                     break
     summands=optimal_summands(n-i,summands)
-
     return summands
 
-if __name__ == '__main__':
-    input = sys.stdin.read()
-    n = int(input)
-    summands = []
-    summands = optimal_summands(n,summands)
+'''
+Not a greedy approach
+Based on pattern
+final list of k elements
+1,2,3...(k-1) sequential (arithmetic progression)
+last element donot belong to the progression.
+Took our AP: 0,1,2.... s
+used sum=(n/2) * [2a+(n-1)d]
+n = no. elements in list
+here a=0, d=1
+so n^2-n-(2s)=0
+solving for n (+ve value)
+n = decimal
+Take n --> integer part
+Now we remove 0. Not needed for output
+so no. elements in list k=n-1
+From pattern, append 1,2,3...(k-1)  to list
+for last element: s - sum(list)
+append last element to list
+Final list is ready!
+'''
 
+def optimal_summands(s):
+    index = (1 + math.sqrt(1+(4*2*s)))/2
+    index = int(index)
+    k = index - 1
+    summands=[]
+    for i in range(1,(k-1)+1):
+        summands.append(i)
+    sumList = ((k-1)*(k-1+1))/2
+    last_element = int(s - sumList)
+    summands.append(last_element)
+    return summands
+    
+
+if __name__ == '__main__':
+    n = int(input())  
+    summands = optimal_summands(n)
     print(len(summands))
     for x in summands:
         print(x, end=' ')
+
+
