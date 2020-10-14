@@ -6,6 +6,7 @@ import math
 #This function has some error
 def optimal_summands_recursive(n,summands):
     if n==0:
+        summands.append(0)
         return summands
     
     #write your code here
@@ -32,7 +33,7 @@ def optimal_summands_recursive(n,summands):
     
                     summands.append(i)
                     break
-    summands=optimal_summands(n-i,summands)
+    summands=optimal_summands_recursive(n-i,summands)
     return summands
 
 '''
@@ -68,13 +69,24 @@ def optimal_summands(s):
     last_element = int(s - sumList)
     summands.append(last_element)
     return summands
-    
+   
 
 if __name__ == '__main__':
-    n = int(input())  
+    n = int(input())
+    summands1=[]
+    summands2=optimal_summands_recursive(n,summands1)
+
+    '''
     summands = optimal_summands(n)
-    print(len(summands))
-    for x in summands:
-        print(x, end=' ')
+   
+    if summands==summands2:
+        print("Both Approaches same result")
+    else:
+        print(f"Algebraic approach --> {summands}")
+        print("Recursive approach --> {summands2}")
+    '''
+    print(len(summands2))
+    for x in summands2:
+       print(x, end=' ')
 
 
