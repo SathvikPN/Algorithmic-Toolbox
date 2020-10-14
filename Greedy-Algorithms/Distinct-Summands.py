@@ -12,29 +12,23 @@ def optimal_summands(n,summands):
         last_element = 0
     else:
         last_element = summands[len(summands)-1]
-    time.sleep(1.5)
-    print(summands)
+
     for i in range(last_element+1,n+1):
         if i not in summands:
             
             print(f"{n} = {i} + {n-i}")
-            if (n-i)==0:
+            if ((n-i)==0):
                 summands.append(i)
-                time.sleep(1.5)
-                print(f"All cutting of {i} excluding summands items done...")
-                print(summands)
-                time.sleep(1.5)
+                return summands
+            elif (i==(n-i)):
+                summands.append(n)
                 return summands
             else:
                 if (n-i) in summands:
-                    time.sleep(1.5)
-                    print(f"{i} NOT in summands \nBUT {n-i} in summands. \nSo,skipping this cutting")
-                    time.sleep(1.5)
+                    
                     continue
                 else:
-                    time.sleep(1.5)
-                    print(f"{i} NOT in summands. Appending {i}")
-                    time.sleep(1.5)
+    
                     summands.append(i)
                     break
     summands=optimal_summands(n-i,summands)
@@ -50,5 +44,3 @@ if __name__ == '__main__':
     print(len(summands))
     for x in summands:
         print(x, end=' ')
-
-
