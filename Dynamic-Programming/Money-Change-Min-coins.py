@@ -24,11 +24,12 @@ def get_change(m): #m==money
             add3 = r//3
             add1 = r%3
             add4 = 0
-            for j in range(1,add1+1):
-                add4 = add4 + 1
-                add3 = add3 - 1
-            add1 = 0
-            coins[i] = add4 + add3
+            while add1>0 and add3>0:
+                for j in range(1,add1+1):
+                    add4 = add4 + 1
+                    add3 = add3 - 1
+                    add1 = add1 - 1
+            coins[i] = add4 + add3 + add1
             print(f'<2> {add4}[Rs.4] + {add3}[Rs.3] + {add1}[Rs.1] = {coins[i]} Coins')
     print('Best Choice is Minimum of',coins)
     return safeCoins + min(coins)
